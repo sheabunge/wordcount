@@ -9,11 +9,14 @@ app.controller('WordCount', ['$scope', function ( $scope ) {
         var text = $scope.text;
         $scope.total_count = new WordCount(text).wordCount();
 
-        // remove quotes
-        text = text.replace(/(?:“|").+?(?:"|”)/, '');
+        // remove other characters
+        text = text.replace(/[^()a-zA-Z“”" ]\B/g, '');
 
-        // remove refrences
-        text = text.replace(/\(.+?\)/, '');
+        // remove quotes
+        text = text.replace(/(?:“|").+?(?:"|”)/g, '');
+
+        // remove references
+        text = text.replace(/\(.+?\)/g, '');
 
         $scope.count = new WordCount(text).wordCount();
     });

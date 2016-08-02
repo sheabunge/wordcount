@@ -1,11 +1,7 @@
 
 var WordCount = function (text) {
     text = text.replace(/\r?\n|\r/g, '');
-    this.full_text = text;
-
-    // remove other characters
-    this.text = text.replace(/-/, ' ');
-    this.text = this.text.replace(/[^()a-zA-Z“”" ]\B/, '');
+    this.text = text;
 };
 
 WordCount.prototype.characterCount = function () {
@@ -13,40 +9,29 @@ WordCount.prototype.characterCount = function () {
 };
 
 WordCount.prototype.words = function () {
-	words_list = [];
-	current_word = "";
+	var words = [], word = '';
+
 	for (var i in this.text) {
-		c = this.text[i];
-		if (c == " ") {
-			if (current_word !== "") {
-				words_list.push(current_word);
-				current_word = "";
+		var c = this.text[i];
+		if (c == ' ' || c == '.' || c == '?' || c == '!' || c == '-') {
+			if (word !== '') {
+				words.push(word);
 			}
-		}
-		else if (c == "." || c == "?" || c == "!") {
-			if (current_word !== "") {
-				words_list.push(current_word);
-				current_word = "";
-			}
-		}
-		else {
-			current_word += c;
+            word = '';
+		} else {
+			word += c;
 		}
 	}
-	if (current_word !== "") {
-		words_list.push(current_word);
-		current_word = "";
+	if (word !== '') {
+		words.push(word);
 	}
-	return words_list;
+	return words;
+};
+
+WordCount.prototype.rewords = function () {
+    return this.text.split(/\s+/);
 };
 
 WordCount.prototype.wordCount = function() {
 	return this.words().length;
-};
-
-WordCount.prototype.sentenceCount = function () {
-	var periods      = (this.full_text.match(/\./g) || []).length;
-	var questions    = (this.full_text.match(/\?/g) || []).length;
-	var exclamations = (this.full_text.match(/!/g) || []).length;
-	return periods + questions + exclamations;
 };
