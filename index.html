@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app">
+<head>
+    <meta charset="utf-8">
+    <title>Assignment Word Counter</title>
+    <link rel="stylesheet" href="dist/app.css">
+    <script src="dist/app.js"></script>
+</head>
+<body ng-controller="WordCount">
+
+<h1>Assignment Word Counter</h1>
+
+<main>
+	<section>
+		<h2>Assignment Text</h2>
+		<textarea rows="20" cols="70" ng-model="text"></textarea>
+	</section>
+
+	<aside>
+		<h2>Total Word Count <div class="count">{{ total_count }}</div></h2>
+		<h2>Without Quotes or References <div class="count">{{ count }}</div></h2>
+	</aside>
+</main>
+
+</body>
+</html>
