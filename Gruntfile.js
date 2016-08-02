@@ -46,7 +46,8 @@ module.exports = function(grunt) {
 				files: {
 					'dist/app.js': [
 						'bower_components/angular/angular.js',
-						'js/wordcount.js'
+						'js/wordcount.js',
+						'js/app.js'
 					]
 				}
 			}
